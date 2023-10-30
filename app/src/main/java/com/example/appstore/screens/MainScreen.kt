@@ -1,12 +1,15 @@
 package com.example.appstore.screens
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Icon
@@ -29,17 +32,19 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.*
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.appstore.R
 
 
 
 @Composable
-fun MainScreen (){
-
-}
-@Composable
-fun ScaffoldExample() {
+fun MainScreen () {
     val mycolor = Color(0.5f, 0.5f, 0.5f, 0.2f)
     Scaffold(
         topBar = {
@@ -68,13 +73,32 @@ fun ScaffoldExample() {
 @Composable
 fun BodyContent(modifier: Modifier){
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Va el icono")
-        Text(text = "Van los productos")
+        MyIcon()
+        Text(
+                text = "Productos",
+                fontSize = 24.sp,
+                modifier = Modifier.padding(8.dp)
+            )
+        Product()
     }
+}
+
+@Composable
+fun MyIcon(){
+    Image(
+        painter = painterResource(R.drawable.logo_gys),
+        contentDescription = "Logo de la empresa",
+        modifier = Modifier
+            .size(250.dp)
+            .padding(15.dp)
+            .shadow(3.dp)
+
+    )
 }
 @Composable
 fun ContentTopBar(){
@@ -145,8 +169,36 @@ fun ContentBottomBar(){
         )
     }
 }
+@Composable
+fun Product(){
+    Row(
+        modifier = Modifier
+            .fillMaxSize().padding(15.dp),
+
+        horizontalArrangement = Arrangement.Start,
+    ) {
+        Image(
+            painter = painterResource(R.drawable.producto),
+            contentDescription = "producto",
+            modifier = Modifier
+                .size(150.dp,200.dp)
+                .clip(RoundedCornerShape(25.dp))
+
+        )
+        DescriptionProduct()
+    }
+}
+@Composable
+fun DescriptionProduct(){
+    Column {
+        Text(text = "Nombre")
+        Text(text = "Precio")
+        Text(text = "Calificacion")
+    }
+}
 @Preview
 @Composable
 fun PreviewMain(){
-    ScaffoldExample()
+    MainScreen()
 }
+
