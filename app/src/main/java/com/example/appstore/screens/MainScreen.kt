@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -20,9 +23,11 @@ import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -170,10 +175,15 @@ fun ContentBottomBar(){
     }
 }
 @Composable
+fun ProductList(){
+
+}
+@Composable
 fun Product(){
     Row(
         modifier = Modifier
-            .fillMaxSize().padding(15.dp),
+            .fillMaxSize()
+            .padding(15.dp),
 
         horizontalArrangement = Arrangement.Start,
     ) {
@@ -181,19 +191,58 @@ fun Product(){
             painter = painterResource(R.drawable.producto),
             contentDescription = "producto",
             modifier = Modifier
-                .size(150.dp,200.dp)
+                .size(150.dp, 200.dp)
                 .clip(RoundedCornerShape(25.dp))
 
         )
-        DescriptionProduct()
+        DescriptionProduct("Pantolon",45000.0f)
     }
 }
 @Composable
-fun DescriptionProduct(){
+fun Qualifi(){
+    Row {
+
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = null,
+            tint = Color.Black,
+
+        )
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = null,
+            tint = Color.Black,
+
+        )
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = null,
+            tint = Color.Black,
+
+        )
+    }
+
+}
+@Composable
+fun PriceIcon(price: Float){
+    Row {
+        Text(text = "$" + String.format("%.2f", price))
+        Spacer(modifier = Modifier.widthIn(50.dp))
+        Icon(
+            imageVector = Icons.Default.FavoriteBorder,
+            contentDescription = null,
+            tint = Color.Black
+        )
+
+    }
+}
+@Composable
+fun DescriptionProduct(name: String,price: Float){
     Column {
-        Text(text = "Nombre")
-        Text(text = "Precio")
-        Text(text = "Calificacion")
+        PriceIcon(price = price)
+        Text(text = name)
+        Spacer(modifier = Modifier.heightIn(130.dp))
+        Qualifi()
     }
 }
 @Preview
