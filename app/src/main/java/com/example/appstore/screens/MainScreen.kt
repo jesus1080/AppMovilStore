@@ -11,9 +11,13 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -42,15 +46,25 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appstore.R
 
 
+data class MyProduct(val name: String, val price: Float, val qualification: Int)
 
+val products: List<MyProduct> = listOf(
+    MyProduct("Pantalon", 345000.0f, 2),
+    MyProduct("Camiseta", 87000f,5),
+    MyProduct("Zapatos", 89000.0f, 1),
+    MyProduct("Pantalon", 345000.0f, 2),
+    MyProduct("Pantalon", 345000.0f, 2),
+    MyProduct("Pantalon", 345000.0f, 2)
+)
 @Composable
 fun MainScreen () {
-    val mycolor = Color(0.5f, 0.5f, 0.5f, 0.2f)
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,19 +91,22 @@ fun MainScreen () {
 }
 @Composable
 fun BodyContent(modifier: Modifier){
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(scrollState),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MyIcon()
         Text(
-                text = "Productos",
-                fontSize = 24.sp,
+                text = "Productos:",
+                fontSize = 25.sp,
+                fontFamily = FontFamily.Cursive,
                 modifier = Modifier.padding(8.dp)
             )
-        Product()
+        ProductList(products = products)
     }
 }
 
@@ -99,10 +116,8 @@ fun MyIcon(){
         painter = painterResource(R.drawable.logo_gys),
         contentDescription = "Logo de la empresa",
         modifier = Modifier
-            .size(250.dp)
+            .size(150.dp)
             .padding(15.dp)
-            .shadow(3.dp)
-
     )
 }
 @Composable
@@ -175,11 +190,13 @@ fun ContentBottomBar(){
     }
 }
 @Composable
-fun ProductList(){
-
+fun ProductList(products: List<MyProduct>){
+    products.forEach { product ->
+        Product(product = product)
+    }
 }
 @Composable
-fun Product(){
+fun Product(product: MyProduct){
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -195,11 +212,11 @@ fun Product(){
                 .clip(RoundedCornerShape(25.dp))
 
         )
-        DescriptionProduct("Pantolon",45000.0f)
+        DescriptionProduct(product)
     }
 }
 @Composable
-fun Qualifi(){
+fun Qualifi(qualification: Int){
     Row {
 
         Icon(
@@ -237,12 +254,12 @@ fun PriceIcon(price: Float){
     }
 }
 @Composable
-fun DescriptionProduct(name: String,price: Float){
+fun DescriptionProduct(product: MyProduct){
     Column {
-        PriceIcon(price = price)
-        Text(text = name)
+        PriceIcon(price = product.price)
+        Text(text = product.name, fontFamily = FontFamily.Cursive, fontSize = 18.sp)
         Spacer(modifier = Modifier.heightIn(130.dp))
-        Qualifi()
+        Qualifi(product.qualification)
     }
 }
 @Preview
