@@ -17,6 +17,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -31,6 +34,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,6 +69,7 @@ fun DescriptionProduct(){
         PriceProduct(360000f, 3)
         ProductColor()
         ProductSize()
+        BuyButons()
     }
 }
 @Composable
@@ -183,23 +188,56 @@ fun SizeOptions(){
 }
 @Composable
 fun SizeOption(sizes: String){
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 0.4f)
     Box(
         modifier = Modifier
             .padding(5.dp)
             .size(50.dp)
-            .clip(RectangleShape)
-            .background(Color.Gray),
+            .clip(RoundedCornerShape(16.dp))
+            .background(mycolor),
         contentAlignment = Alignment.Center
     ){
         Text(
             text = sizes,
-            color = Color.White,
-            fontSize = 30.sp
+            fontSize = 20.sp,
+            fontFamily = FontFamily.Monospace
         )
+    }
+}
+@Composable
+fun BuyButons(){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Blue),
+        ) {
+            Text(text = "Comprar ahora", fontWeight = FontWeight.Bold)
+        }
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF87CEEB))
+        ) {
+            Text(text = "Agregar al carrito", fontWeight = FontWeight.Bold)
+        }
     }
 }
 @Preview
 @Composable
 fun PreviewProduct(){
     ProductScreen()
+}
+@Preview
+@Composable
+fun PreviewSize(){
+    BuyButons()
 }
