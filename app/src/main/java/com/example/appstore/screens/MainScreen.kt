@@ -1,6 +1,7 @@
 package com.example.appstore.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -210,6 +211,7 @@ fun Product(product: MyProduct){
             modifier = Modifier
                 .size(150.dp, 200.dp)
                 .clip(RoundedCornerShape(25.dp))
+                .clickable {  }
 
         )
         DescriptionProduct(product)

@@ -2,6 +2,7 @@ package com.example.appstore.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,9 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,17 +54,45 @@ fun ProductScreen(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        ImageProduct()
+        Spacer(modifier = Modifier.heightIn(10.dp))
+        DescriptionProduct()
+    }
+}
+@Composable
+fun ImageProduct(){
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Image(
             painter = painterResource(R.drawable.producto),
             contentDescription = "producto",
             contentScale =  ContentScale.FillWidth,
             modifier = Modifier.size(500.dp)
         )
-        Spacer(modifier = Modifier.heightIn(10.dp))
-        DescriptionProduct()
+
+        Icon(
+            imageVector = Icons.Default.ArrowBack,
+            contentDescription = "atras",
+            tint = Color.Black,
+            modifier = Modifier
+                .size(50.dp)
+                .padding(10.dp)
+                .align(Alignment.TopStart)
+        )
+
+        Icon(
+            imageVector = Icons.Default.Share,
+            contentDescription = "compartir",
+            tint = Color.Black,
+            modifier = Modifier
+                .size(50.dp)
+                .padding(10.dp)
+                .align(Alignment.TopEnd)
+                .clickable {  }
+        )
     }
 }
-
 @Composable
 fun DescriptionProduct(){
     Column {
