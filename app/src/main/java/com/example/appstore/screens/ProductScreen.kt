@@ -41,10 +41,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appstore.R
 
 @Composable
-fun ProductScreen(){
+fun ProductScreen(navController: NavController, name: String?){
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -54,13 +55,13 @@ fun ProductScreen(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        ImageProduct()
+        ImageProduct(navController)
         Spacer(modifier = Modifier.heightIn(10.dp))
-        DescriptionProduct()
+        DescriptionProduct(name)
     }
 }
 @Composable
-fun ImageProduct(){
+fun ImageProduct(navController: NavController){
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -79,6 +80,7 @@ fun ImageProduct(){
                 .size(50.dp)
                 .padding(10.dp)
                 .align(Alignment.TopStart)
+                .clickable(true, onClick = {navController.popBackStack()})
         )
 
         Icon(
@@ -89,14 +91,14 @@ fun ImageProduct(){
                 .size(50.dp)
                 .padding(10.dp)
                 .align(Alignment.TopEnd)
-                .clickable {  }
+
         )
     }
 }
 @Composable
-fun DescriptionProduct(){
+fun DescriptionProduct(name: String?){
     Column {
-        NameProduct("Camison")
+        NameProduct(name)
         PriceProduct(360000f, 3)
         ProductColor()
         ProductSize()
@@ -104,18 +106,21 @@ fun DescriptionProduct(){
     }
 }
 @Composable
-fun NameProduct(name: String){
+fun NameProduct(name: String?){
     Row(
         modifier = Modifier.fillMaxSize(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = name,
-            fontFamily = FontFamily.Cursive,
-            fontSize = 36.sp,
-            modifier = Modifier.padding(10.dp)
-        )
+        name?.let {
+            Text(
+                text = name,
+                fontFamily = FontFamily.Cursive,
+                fontSize = 36.sp,
+                modifier = Modifier.padding(10.dp)
+            )
+        }
+
         Icon(
             imageVector = Icons.Default.FavoriteBorder,
             contentDescription = null,
@@ -262,11 +267,7 @@ fun BuyButons(){
         }
     }
 }
-@Preview
-@Composable
-fun PreviewProduct(){
-    ProductScreen()
-}
+
 @Preview
 @Composable
 fun PreviewSize(){

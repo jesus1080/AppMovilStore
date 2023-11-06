@@ -50,7 +50,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appstore.R
+import com.example.appstore.navigation.StoreScreens
 
 
 data class MyProduct(val name: String, val price: Float, val qualification: Int)
@@ -60,11 +62,11 @@ val products: List<MyProduct> = listOf(
     MyProduct("Camiseta", 87000f,5),
     MyProduct("Zapatos", 89000.0f, 1),
     MyProduct("Pantalon", 345000.0f, 2),
-    MyProduct("Pantalon", 345000.0f, 2),
-    MyProduct("Pantalon", 345000.0f, 2)
+    MyProduct("Pantalon", 345000.0f, 3),
+    MyProduct("Pantalon", 345000.0f, 4)
 )
 @Composable
-fun MainScreen () {
+fun MainScreen (navController: NavController) {
     val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Scaffold(
         topBar = {
@@ -86,12 +88,12 @@ fun MainScreen () {
 
     ) { innerPadding ->
         BodyContent(modifier = Modifier
-            .padding(innerPadding))
+            .padding(innerPadding), navController)
 
     }
 }
 @Composable
-fun BodyContent(modifier: Modifier){
+fun BodyContent(modifier: Modifier,navController: NavController){
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -107,7 +109,8 @@ fun BodyContent(modifier: Modifier){
                 fontFamily = FontFamily.Cursive,
                 modifier = Modifier.padding(8.dp)
             )
-        ProductList(products = products)
+        ProductList(products = products,navController)
+        Spacer(modifier = Modifier.heightIn(50.dp))
     }
 }
 
@@ -191,13 +194,13 @@ fun ContentBottomBar(){
     }
 }
 @Composable
-fun ProductList(products: List<MyProduct>){
+fun ProductList(products: List<MyProduct>,navController: NavController){
     products.forEach { product ->
-        Product(product = product)
+        Product(product = product,navController)
     }
 }
 @Composable
-fun Product(product: MyProduct){
+fun Product(product: MyProduct,navController: NavController){
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -211,7 +214,9 @@ fun Product(product: MyProduct){
             modifier = Modifier
                 .size(150.dp, 200.dp)
                 .clip(RoundedCornerShape(25.dp))
-                .clickable {  }
+                .clickable(true, onClick = {
+                    navController.navigate(route = StoreScreens.ProductScreen.route + product.name)
+                })
 
         )
         DescriptionProduct(product)
@@ -220,25 +225,13 @@ fun Product(product: MyProduct){
 @Composable
 fun Qualifi(qualification: Int){
     Row {
-
-        Icon(
-            imageVector = Icons.Default.Star,
-            contentDescription = null,
-            tint = Color.Black,
-
-        )
-        Icon(
-            imageVector = Icons.Default.Star,
-            contentDescription = null,
-            tint = Color.Black,
-
-        )
-        Icon(
-            imageVector = Icons.Default.Star,
-            contentDescription = null,
-            tint = Color.Black,
-
-        )
+        for (i in 0 until qualification ) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = Color.Black
+            )
+        }
     }
 
 }
@@ -264,9 +257,5 @@ fun DescriptionProduct(product: MyProduct){
         Qualifi(product.qualification)
     }
 }
-@Preview
-@Composable
-fun PreviewMain(){
-    MainScreen()
-}
+
 
