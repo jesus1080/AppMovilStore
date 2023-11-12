@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.appstore.R
+import com.example.appstore.navigation.StoreScreens
 
 @Composable
 fun ProductScreen(navController: NavController, name: String?){
@@ -57,7 +58,7 @@ fun ProductScreen(navController: NavController, name: String?){
 
         ImageProduct(navController)
         Spacer(modifier = Modifier.heightIn(10.dp))
-        DescriptionProduct(name)
+        DescriptionProduct(name,navController)
     }
 }
 @Composable
@@ -96,13 +97,13 @@ fun ImageProduct(navController: NavController){
     }
 }
 @Composable
-fun DescriptionProduct(name: String?){
+fun DescriptionProduct(name: String?, navController: NavController){
     Column {
         NameProduct(name)
         PriceProduct(360000f, 3)
         ProductColor()
         ProductSize()
-        BuyButons()
+        BuyButons(navController)
     }
 }
 @Composable
@@ -241,7 +242,7 @@ fun SizeOption(sizes: String){
     }
 }
 @Composable
-fun BuyButons(){
+fun BuyButons(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -250,26 +251,29 @@ fun BuyButons(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(route = StoreScreens.ToBuy.route)
+            },
             modifier = Modifier
                 .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Blue),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(0.9f)),
         ) {
-            Text(text = "Comprar ahora", fontWeight = FontWeight.Bold)
+            Text(text = "Comprar ahora", color = Color.White)
         }
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF87CEEB))
-        ) {
-            Text(text = "Agregar al carrito", fontWeight = FontWeight.Bold)
-        }
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(0.3f)),
+            content = {
+                Text(text = "Agregar al carrito", color = Color.White)
+            }
+        )
     }
 }
 
 @Preview
 @Composable
 fun PreviewSize(){
-    BuyButons()
+
 }
