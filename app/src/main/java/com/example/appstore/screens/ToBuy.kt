@@ -45,7 +45,7 @@ var phoneNumber: MutableState<String> = mutableStateOf("")
 var address : MutableState<String> = mutableStateOf("")
 var cardNumber : MutableState<String> = mutableStateOf("")
 @Composable
-fun ToBuy(/*navController: NavController*/){
+fun ToBuy(navController: NavController){
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -55,12 +55,12 @@ fun ToBuy(/*navController: NavController*/){
         horizontalAlignment = Alignment.CenterHorizontally
     ){
 
-        DescriptionProductBuy()
+        DescriptionProductBuy(navController)
         PurchaceForm()
     }
 }
 @Composable
-fun DescriptionProductBuy(/*navController : NavController*/){
+fun DescriptionProductBuy(navController : NavController){
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
@@ -73,7 +73,7 @@ fun DescriptionProductBuy(/*navController : NavController*/){
                 modifier = Modifier
                     .size(50.dp)
                     .padding(10.dp)
-                    //.clickable(true, onClick = { navController.popBackStack() })
+                    .clickable(true, onClick = { navController.popBackStack() })
             )
             Spacer(modifier = Modifier.widthIn(10.dp))
             Text(
@@ -91,6 +91,7 @@ fun PurchaceForm(){
     var phoneNumber by remember {mutableStateOf("")}
     var address by remember {mutableStateOf("")}
     var cardNumber by remember {mutableStateOf("")}
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -172,9 +173,9 @@ fun PurchaceForm(){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(alpha = 0.9f))
+            colors = ButtonDefaults.buttonColors(backgroundColor = mycolor)
         ) {
-            Text(text = "Realizar Pago", color = Color.White)
+            Text(text = "Realizar Pago", color = Color.Black)
         }
     }
 }
@@ -218,6 +219,6 @@ fun TotalPurchace(text: String, vari: String){
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewToBuy(){
-    ToBuy()
+    //ToBuy()
 }
 

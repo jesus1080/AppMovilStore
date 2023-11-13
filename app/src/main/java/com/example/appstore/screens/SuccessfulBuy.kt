@@ -25,11 +25,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.ColorUtils
+import androidx.navigation.NavController
+import com.example.appstore.navigation.StoreScreens
 
 
 @Composable
-fun SuccessfulBuy(){
+fun SuccessfulBuy(navController: NavController){
     val myColor = Color(0.1f, 0.7f, 0.1f, 0.7f)
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -53,14 +56,16 @@ fun SuccessfulBuy(){
         InfoText(text = "Numero de pedido: 0927287822")
         InfoText(text = "Gracias por tu compra!")
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(route = StoreScreens.MainScreen.route)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(50.dp),
             content = {
-                Text(text = "Continuar", color = Color.White)
+                Text(text = "Continuar", color = Color.Black)
             },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(alpha = 0.9f))
+            colors = ButtonDefaults.buttonColors(backgroundColor = mycolor)
         )
     }
 }
@@ -79,5 +84,5 @@ fun InfoText(text: String){
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewSuccess(){
-    SuccessfulBuy()
+    //SuccessfulBuy()
 }

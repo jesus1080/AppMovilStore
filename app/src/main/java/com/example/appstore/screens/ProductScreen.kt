@@ -203,7 +203,7 @@ fun ColoredCircled(color: Color){
 fun ProductSize(){
     Column {
         Text(
-            text = "Tamanio: ",
+            text = "Tamaño: ",
             fontSize = 36.sp,
             modifier = Modifier.padding(10.dp)
         )
@@ -225,7 +225,7 @@ fun SizeOptions(){
 }
 @Composable
 fun SizeOption(sizes: String){
-    val mycolor = Color(0.9f, 0.8f, 0.9f, 0.4f)
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Box(
         modifier = Modifier
             .padding(5.dp)
@@ -243,6 +243,7 @@ fun SizeOption(sizes: String){
 }
 @Composable
 fun BuyButons(navController: NavController){
+    val mycolor = Color(0.9f, 0.8f, 0.9f, 1.0f)
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -256,7 +257,7 @@ fun BuyButons(navController: NavController){
             },
             modifier = Modifier
                 .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(0.9f)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
         ) {
             Text(text = "Comprar ahora", color = Color.White)
         }
@@ -264,7 +265,7 @@ fun BuyButons(navController: NavController){
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black.copy(0.3f)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = mycolor),
             content = {
                 Text(text = "Agregar al carrito", color = Color.White)
             }

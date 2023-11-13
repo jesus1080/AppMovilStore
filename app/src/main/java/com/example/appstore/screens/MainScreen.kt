@@ -71,9 +71,9 @@ fun MainScreen (navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 backgroundColor = mycolor,
-                elevation = 1.dp
+                elevation = 4.dp
             ) {
-               ContentBottomBar()
+               ContentBottomBar(navController)
             }
         },
 
@@ -148,7 +148,7 @@ fun ContentTopBar(){
     }
 }
 @Composable
-fun ContentBottomBar(){
+fun ContentBottomBar(navController: NavController){
     Row (
         modifier = Modifier.fillMaxSize(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -181,6 +181,9 @@ fun ContentBottomBar(){
             tint = Color.Black,
             modifier = Modifier
                 .padding(8.dp)
+                .clickable {
+
+                }
         )
     }
 }

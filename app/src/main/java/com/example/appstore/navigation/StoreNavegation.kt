@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.example.appstore.screens.MainScreen
 import com.example.appstore.screens.ProductScreen
 import com.example.appstore.screens.ToBuy
+import com.example.appstore.screens.SuccessfulBuy
 
 
 @Composable
@@ -29,7 +30,10 @@ fun StoreNavigation(){
             ProductScreen(navController, it.arguments?.getString("name"))
         }
         composable(route = StoreScreens.ToBuy.route){
-            ToBuy()
+            ToBuy(navController)
+        }
+        composable(route = StoreScreens.SuccessfulBuy.route){
+            SuccessfulBuy(navController)
         }
     }
 }
