@@ -81,8 +81,3 @@ fun InfoText(text: String){
         )
 
 }
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewSuccess(){
-    //SuccessfulBuy()
-}

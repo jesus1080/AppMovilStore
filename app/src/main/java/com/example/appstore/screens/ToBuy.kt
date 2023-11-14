@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.appstore.navigation.StoreScreens
 
 var email : MutableState<String> = mutableStateOf("")
 var phoneNumber: MutableState<String> = mutableStateOf("")
@@ -56,7 +57,7 @@ fun ToBuy(navController: NavController){
     ){
 
         DescriptionProductBuy(navController)
-        PurchaceForm()
+        PurchaceForm(navController)
     }
 }
 @Composable
@@ -86,7 +87,7 @@ fun DescriptionProductBuy(navController : NavController){
     }
 }
 @Composable
-fun PurchaceForm(){
+fun PurchaceForm(navController: NavController){
     var email by remember {mutableStateOf("")}
     var phoneNumber by remember {mutableStateOf("")}
     var address by remember {mutableStateOf("")}
@@ -169,7 +170,7 @@ fun PurchaceForm(){
         )
         InformationPurchace()
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(StoreScreens.SuccessfulBuy.route) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
@@ -216,9 +217,5 @@ fun TotalPurchace(text: String, vari: String){
         )
     }
 }
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewToBuy(){
-    //ToBuy()
-}
+
 

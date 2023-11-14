@@ -198,8 +198,3 @@ fun InformationUser(){
 
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewUserProfile(){
-    //UserProfile()
-}

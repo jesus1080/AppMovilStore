@@ -98,7 +98,13 @@ fun ImageProduct(navController: NavController){
 }
 @Composable
 fun DescriptionProduct(name: String?, navController: NavController){
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         NameProduct(name)
         PriceProduct(360000f, 3)
         ProductColor()
@@ -153,7 +159,8 @@ fun Cualifi( qualification: Int){
 @Composable
 fun PriceProduct(price: Float,qualification: Int){
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -267,14 +274,9 @@ fun BuyButons(navController: NavController){
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(backgroundColor = mycolor),
             content = {
-                Text(text = "Agregar al carrito", color = Color.White)
+                Text(text = "Agregar al carrito", color = Color.Black)
             }
         )
     }
 }
 
-@Preview
-@Composable
-fun PreviewSize(){
-
-}

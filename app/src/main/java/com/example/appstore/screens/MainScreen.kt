@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.appstore.R
+import com.example.appstore.navigation.StoreNavigation
 import com.example.appstore.navigation.StoreScreens
 
 
@@ -160,6 +161,7 @@ fun ContentBottomBar(navController: NavController){
             tint = Color.Black,
             modifier = Modifier
                 .padding(8.dp)
+                .clickable { navController.navigate(StoreScreens.MainScreen.route) }
         )
         Icon(
             imageVector = Icons.Default.ShoppingCart,
@@ -181,9 +183,7 @@ fun ContentBottomBar(navController: NavController){
             tint = Color.Black,
             modifier = Modifier
                 .padding(8.dp)
-                .clickable {
-
-                }
+                .clickable { navController.navigate(StoreScreens.UserProfile.route)}
         )
     }
 }

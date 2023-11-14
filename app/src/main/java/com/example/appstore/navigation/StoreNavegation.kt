@@ -10,6 +10,7 @@ import com.example.appstore.screens.MainScreen
 import com.example.appstore.screens.ProductScreen
 import com.example.appstore.screens.ToBuy
 import com.example.appstore.screens.SuccessfulBuy
+import com.example.appstore.screens.UserProfile
 
 
 @Composable
@@ -34,6 +35,9 @@ fun StoreNavigation(){
         }
         composable(route = StoreScreens.SuccessfulBuy.route){
             SuccessfulBuy(navController)
+        }
+        composable(route = StoreScreens.UserProfile.route){
+            UserProfile(navController)
         }
     }
 }
