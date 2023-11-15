@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appstore.navigation.StoreNavigation
 import com.example.appstore.ui.theme.AppStoreTheme
 import com.example.appstore.screens.MainScreen
@@ -31,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     AppStoreTheme {
-        StoreNavigation()
+        //StoreNavigation()
     }
 }
